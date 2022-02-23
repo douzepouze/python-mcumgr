@@ -3,7 +3,7 @@
 #   mynewt-mcumgr/protocol.md
 #   mynewt-mcumgrmgmt/inlcude/mgmt.h
 
-from enum import Enum, IntEnum
+from enum import IntEnum
 import struct
 import logging
 
@@ -94,23 +94,15 @@ class Mynewt:
         RESET          = 5
         # fmt: on
 
-    """
-    #define OS_MGMT_TASK_NAME_LEN       32
+    class IMAGE_MGMT_ID(IntEnum):
+        """ Command IDs for Mynewt IMAGE management group. """
 
-    struct os_mgmt_task_info {
-        uint8_t oti_prio;
-        uint8_t oti_taskid;
-        uint8_t oti_state;
-        uint16_t oti_stkusage;
-        uint16_t oti_stksize;
-        uint32_t oti_cswcnt;
-        uint32_t oti_runtime;
-        uint32_t oti_last_checkin;
-        uint32_t oti_next_checkin;
-
-        char oti_name[OS_MGMT_TASK_NAME_LEN];
-    };
-    """
+        STATE      = 0
+        UPLOAD     = 1
+        FILE       = 2
+        CORELIST   = 3
+        CORELOAD   = 4
+        ERASE      = 5
 
 
 class MgmtHdr:
@@ -141,7 +133,6 @@ class MgmtHdr:
         self.nh_seq   = nh_seq
         self.nh_id    = nh_id
         # fmt: on
-
 
     # B = uint8, H = uint16, > = big endian
     _STRUCT_FMT = ">BBHHBB"
@@ -214,4 +205,3 @@ class MgmtMsg:
 
         payload = data[hdr_size : hdr_size + hdr.nh_len]
         return MgmtMsg(hdr, payload)
-

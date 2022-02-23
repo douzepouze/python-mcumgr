@@ -1,2 +1,1 @@
-# lazy
 from mcumgr import *

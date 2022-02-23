@@ -13,27 +13,25 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="lohmega-python-mcumgr", # TODO username
+    name="douzepouze-python-mcumgr",
     version=VERSION,
-    author="Lohmega",
-    author_email="info@lohmega.com",
-    entry_points={"console_scripts": ["bblog=mcumgr.cli:main"]},   
+    author="Steffen Görtz, Lohmega",
+    author_email="steffen.goertz@grandcentrix.net",
+    entry_points={"console_scripts": ["pymcumgr=mcumgr.cli:main"]},
     description="Library and command line tool for mcumgr protocol(s)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lohmega/python-mcumgr",
+    url="https://github.com/douzepouze/python-mcumgr",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     install_requires=[
         "cbor",
-        "crcmod",
-        # for serial/nlip transport
-        "serial",
-        # for BLE transport
+        "asyncclick",
+        "anyio",
         "bleak > 0.5.1",
     ],
     python_requires='>=3.4',
